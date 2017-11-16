@@ -1,3 +1,6 @@
+# Binary search can work only on a sorted list
+
+
 def binary_search(item, alist):
 
     first = 0
