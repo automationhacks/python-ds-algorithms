@@ -15,7 +15,7 @@ def play_hot_potato_game(items, reps):
 
     # O(n - 1)
     while queue.size() > 1:
-        # O(#reps,
+        # O(#reps)
         for i in range(reps):
             first = queue.dequeue()
             print(first)
@@ -31,4 +31,5 @@ if __name__ == "__main__":
     people = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
     num = 5
     print('Winner is: {}'.format(play_hot_potato_game(people, num)))
+    # Final complexity: O(n) + O(n-1) + O(n) = 3O(n) = O(n)
 
