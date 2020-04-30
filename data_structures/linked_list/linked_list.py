@@ -1,5 +1,6 @@
 # List class does not hold any data itself
 # But reference to node which actually holds data
+# Reference: https://runestone.academy/runestone/books/published/pythonds/BasicDS/ImplementinganUnorderedListLinkedLists.html#fig-node2
 
 
 class UnorderedList:
@@ -37,6 +38,28 @@ class UnorderedList:
 
         return found
 
+    def remove(self, item):
+        current = self.head
+        previous = None
+        found = False
+
+        while not found:
+            if current.get_data() == item:
+                found = True
+            else:
+                previous = current
+                current = current.get_next()
+
+        # If item to be removed is first item
+        if previous is None:
+            self.head = current.get_next()
+        else:
+            # set link of previous to current items next
+            # effectively removing the item from the list since no node points
+            # to it
+            previous.set_next(current.get_next())
+
+
 
 class Node:
     def __init__(self, data):
@@ -69,4 +92,8 @@ def test_list_operations():
     assert numbers.size() == 4
     assert numbers.search(5)
     assert not numbers.search(100)
+
+    numbers.remove(10)
+    assert numbers.size() == 3
+    assert not numbers.search(10)
 
