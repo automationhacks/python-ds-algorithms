@@ -18,6 +18,15 @@ class UnorderedList:
         temp.set_next(self.head)
         self.head = temp
 
+    def append(self, item):
+        current = self.head
+        temp = Node(item)
+
+        while current.get_next() is not None:
+            current = current.get_next()
+
+        current.set_next(temp)
+
     def size(self):
         current = self.head
         count = 0
@@ -60,7 +69,6 @@ class UnorderedList:
             previous.set_next(current.get_next())
 
 
-
 class Node:
     def __init__(self, data):
         # data stored in the node
@@ -84,16 +92,28 @@ class Node:
 
 def test_list_operations():
     numbers = UnorderedList()
+
+    # Add items to list
     numbers.add(17)
     numbers.add(10)
     numbers.add(5)
     numbers.add(3)
 
     assert numbers.size() == 4
+
+    # Search
     assert numbers.search(5)
     assert not numbers.search(100)
 
+    # Remove item from list
     numbers.remove(10)
     assert numbers.size() == 3
     assert not numbers.search(10)
 
+    # Remove last item from list
+    numbers.remove(17)
+    assert numbers.size() == 2
+    assert not numbers.search(17)
+
+    numbers.append(2)
+    assert numbers.search(2)
