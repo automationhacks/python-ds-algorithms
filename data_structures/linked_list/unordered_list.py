@@ -1,15 +1,10 @@
-# List class does not hold any data itself
-# But reference to node which actually holds data
-# Reference: https://runestone.academy/runestone/books/published/pythonds/BasicDS/ImplementinganUnorderedListLinkedLists.html#fig-node2
+from data_structures.linked_list.node import Node
+from data_structures.linked_list.base_list import BaseList
 
 
-class UnorderedList:
+class UnorderedList(BaseList):
     def __init__(self):
-        # head points to first item in list
-        self.head = None
-
-    def is_empty(self):
-        return self.head is None
+        super().__init__()
 
     def add(self, item):
         # add item to first item (i.e. head)
@@ -26,44 +21,6 @@ class UnorderedList:
             current = current.get_next()
 
         current.set_next(temp)
-
-    def index(self, item):
-        current = self.head
-        index = 0
-        found = False
-
-        while current is not None and not found:
-            if current.get_data() == item:
-                found = True
-                break
-            else:
-                current = current.get_next()
-                index += 1
-
-        if found:
-            return index
-        else:
-            return 'Not Found'
-
-    def size(self):
-        current = self.head
-        count = 0
-        while current is not None:
-            count += 1
-            current = current.get_next()
-
-        return count
-
-    def search(self, item):
-        current = self.head
-        found = False
-        while current is not None and not found:
-            if current.get_data() == item:
-                found = True
-            else:
-                current = current.get_next()
-
-        return found
 
     def insert(self, item, pos):
         node = Node(item)
@@ -89,17 +46,6 @@ class UnorderedList:
         previous.set_next(node)
         node.set_next(None)
 
-    def pop(self):
-        current = self.head
-        previous = None
-
-        while current.get_next() is not None:
-            previous = current
-            current = current.get_next()
-
-        previous.set_next(None)
-        return current.get_data()
-
     def remove(self, item):
         current = self.head
         previous = None
@@ -121,26 +67,16 @@ class UnorderedList:
             # to it
             previous.set_next(current.get_next())
 
+    def search(self, item):
+        current = self.head
+        found = False
+        while current is not None and not found:
+            if current.get_data() == item:
+                found = True
+            else:
+                current = current.get_next()
 
-class Node:
-    def __init__(self, data):
-        # data stored in the node
-        self.data = data
-        # reference to next node in the list
-        # if None, then it means we are on the last node of the list
-        self.next = None
-
-    def get_data(self):
-        return self.data
-
-    def set_data(self, data):
-        self.data = data
-
-    def get_next(self):
-        return self.next
-
-    def set_next(self, next):
-        self.next = next
+        return found
 
 
 def test_list_operations():
