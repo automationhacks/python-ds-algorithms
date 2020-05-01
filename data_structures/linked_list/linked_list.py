@@ -27,6 +27,24 @@ class UnorderedList:
 
         current.set_next(temp)
 
+    def index(self, item):
+        current = self.head
+        index = 0
+        found = False
+
+        while current is not None and not found:
+            if current.get_data() == item:
+                found = True
+                break
+            else:
+                current = current.get_next()
+                index += 1
+
+        if found:
+            return index
+        else:
+            return 'Not Found'
+
     def size(self):
         current = self.head
         count = 0
@@ -46,6 +64,41 @@ class UnorderedList:
                 current = current.get_next()
 
         return found
+
+    def insert(self, item, pos):
+        node = Node(item)
+        current = self.head
+        previous = None
+        index = 0
+
+        while current.get_next() is not None:
+            if index == pos:
+                if previous is not None:
+                    previous.set_next(node)
+                    node.set_next(current)
+                else:
+                    node.set_next(current)
+                    self.head = node
+                return
+            else:
+                previous = current
+                current = current.get_next()
+                index += 1
+
+        # If item is to be inserted at the last index
+        previous.set_next(node)
+        node.set_next(None)
+
+    def pop(self):
+        current = self.head
+        previous = None
+
+        while current.get_next() is not None:
+            previous = current
+            current = current.get_next()
+
+        previous.set_next(None)
+        return current.get_data()
 
     def remove(self, item):
         current = self.head
@@ -117,3 +170,32 @@ def test_list_operations():
 
     numbers.append(2)
     assert numbers.search(2)
+
+    # Get index of an item
+    assert numbers.index(5) == 1
+
+    # Pop last item in the list
+    prime = UnorderedList()
+    prime.add(3)
+    prime.add(5)
+    prime.add(7)
+    prime.add(11)
+    item = prime.pop()
+    assert item == 3
+    assert not prime.search(3)
+
+    # Insert at index
+    person = UnorderedList()
+    person.add("Rob")
+    person.add("Joe")
+    person.add("Margaret")
+    person.add("Ramesh")
+
+    person.insert("Satya", 0)
+    assert person.index("Satya") == 0
+    person.insert("Gaurav", 2)
+    assert person.index("Gaurav") == 2
+    last_index = person.size() - 1
+    print(last_index)
+    person.insert("Jay", last_index)
+    assert person.search("Jay")
