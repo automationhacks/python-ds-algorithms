@@ -32,6 +32,27 @@ def is_palindrome(string):
     return True
 
 
+def is_palindrome_recursive(string, start, end):
+    if start == end:
+        return True
+
+    if string[start] != string[end]:
+        return False
+
+    if start < end + 1:
+        return is_palindrome_recursive(string, start + 1, end - 1)
+
+    return True
+
+
 def test_palindrome():
     assert is_palindrome('kayak')
     assert is_palindrome('aibohphobia')
+
+
+def test_palindrome_recursive():
+    string = 'kayak'
+    assert is_palindrome_recursive(string, 0, len(string) - 1)
+
+    string = 'aibohphobia'
+    assert is_palindrome_recursive(string, 0, len(string) - 1)
