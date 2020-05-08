@@ -24,11 +24,14 @@ def find_min_coins(coin_values, change):
     return min_coins
 
 
-def test_min_coin():
+
+
+def test_min_coin_slow_recursive():
     start = time.time()
     result = find_min_coins(COINS, 63)
     assert result == 6
     end = time.time()
     time_elapsed = end - start
     print('Total time taken: {}'.format(time_elapsed))
+
 
