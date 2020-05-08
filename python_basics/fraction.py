@@ -42,7 +42,6 @@ class Fraction:
         return n
 
 
-
 # myf = Fraction(3, 5)
 # print(myf)
 # print(myf.__str__())
@@ -64,4 +63,3 @@ f1 = Fraction(1, 4)
 f2 = Fraction(1, 2)
 f3 = f1 + f2
 print(f3)
-
