@@ -1,20 +1,22 @@
-def selection_sort(alist):
-    for fill_slot in range(len(alist) - 1, 0, -1):
-
-        position_of_max = 0
-
-        for location in range(1, fill_slot + 1):
-
-            # find location of max value
-            if alist[location] > alist[position_of_max]:
-                position_of_max = location
-
-        # exchange the last value with the max value item
-        temp = alist[fill_slot]
-        alist[fill_slot] = alist[position_of_max]
-        alist[position_of_max] = temp 
+# Finds position of item with max value and does only one exchange
+# Complexity is O(n^2) but performs better in benchmarks
+# because of limited exchanges
 
 
-alist = [54, 26, 93, 17, 77, 31, 44, 55, 20]
-selection_sort(alist)
-print('After sorting {}'.format(alist))
+def selection_sort(numbers):
+    for fill_slot in range(len(numbers) - 1, 0, -1):
+        max_pos = 0
+        for idx in range(1, fill_slot + 1):
+            if numbers[idx] > numbers[max_pos]:
+                max_pos = idx
+
+        temp = numbers[fill_slot]
+        numbers[fill_slot] = numbers[max_pos]
+        numbers[max_pos] = temp
+    return numbers
+
+
+def test_selection_sort():
+    numbers = [54, 26, 93, 17, 77, 31, 44, 55, 20]
+    sorted = [17, 20, 26, 31, 44, 54, 55, 77, 93]
+    assert selection_sort(numbers) == sorted
