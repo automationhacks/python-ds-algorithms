@@ -9,6 +9,7 @@ Assumption:
 2. strings would be equal length
 """
 
+
 # Solution 1:
 # Find if each char in list 1 in present in list 2
 # if found then update the value to None
@@ -40,6 +41,7 @@ def is_anagram(s1, s2):
         pos_1 += 1
 
         return still_ok
+
 
 print(is_anagram('python', 'typhon'))
 
