@@ -26,11 +26,13 @@ def merge_sort(alist):
                 j += 1
             k += 1
 
+        # Merge any remaining nos in left
         while i < len(left):
             alist[k] = left[i]
             i += 1
             k += 1
 
+        # Merge any remaining nos in right
         while j < len(right):
             alist[k] = right[j]
             j += 1
