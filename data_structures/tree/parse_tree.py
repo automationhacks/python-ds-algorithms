@@ -56,7 +56,21 @@ def evaluate(parse_tree):
         return parse_tree.get_root()
 
 
+# Rewrite above function to evaluate expression in a post order fashion
+def post_order_evaluate(tree):
+    if tree:
+        left = post_order_evaluate(tree.get_left_child())
+        right = post_order_evaluate(tree.get_right_child())
+
+        if left and right:
+            func = operator_map[tree.get_root()]
+            return func(left, right)
+        else:
+            return tree.get_root()
+
+
 def test_parse_tree_create():
     p_tree = build_parse_tree('( ( 10 + 5 ) * 3 )')
     assert p_tree.get_root() == '*'
     assert evaluate(p_tree) == 45
+    assert post_order_evaluate(p_tree) == 45
