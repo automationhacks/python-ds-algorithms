@@ -1,7 +1,14 @@
+import operator
+
 from data_structures.stack.stack import Stack
 from data_structures.tree.tree import BinaryTree
 
-OPERATORS = ['+', '-', '*', '/']
+operator_map = {
+    '+': operator.add,
+    '-': operator.sub,
+    '*': operator.mul,
+    '/': operator.truediv,
+}
 
 
 def build_parse_tree(expr):
@@ -36,6 +43,20 @@ def build_parse_tree(expr):
     return tree
 
 
+def evaluate(parse_tree):
+    left_child = parse_tree.get_left_child()
+    right_child = parse_tree.get_right_child()
+
+    # Recurse and call the operator on the return from recursion
+    if left_child and right_child:
+        func = operator_map[parse_tree.get_root()]
+        return func(evaluate(left_child), evaluate(right_child))
+    else:
+        # Base case (If left, right child are None, then it must be a leaf)
+        return parse_tree.get_root()
+
+
 def test_parse_tree_create():
     p_tree = build_parse_tree('( ( 10 + 5 ) * 3 )')
     assert p_tree.get_root() == '*'
+    assert evaluate(p_tree) == 45
