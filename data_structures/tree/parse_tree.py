@@ -69,8 +69,23 @@ def post_order_evaluate(tree):
             return tree.get_root()
 
 
+def print_expression(tree):
+    expr = ''
+    if tree:
+        expr = '(' + print_expression(tree.get_left_child())
+        expr += str(tree.get_root())
+        expr += print_expression(tree.get_right_child()) + ')'
+    return expr
+
+
 def test_parse_tree_create():
     p_tree = build_parse_tree('( ( 10 + 5 ) * 3 )')
     assert p_tree.get_root() == '*'
     assert evaluate(p_tree) == 45
     assert post_order_evaluate(p_tree) == 45
+
+
+def test_print_expression():
+    expr = '( ( 10 + 5 ) * 3 )'
+    p_tree = build_parse_tree(expr)
+    print(print_expression(p_tree))
