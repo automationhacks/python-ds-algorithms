@@ -43,6 +43,9 @@ class BinarySearchTree:
     def __getitem__(self, item):
         return self.get(item)
 
+    def __contains__(self, item):
+        return True if self.get(item) else False
+
     def get(self, key):
         if self.root:
             result = self._get(key, self.root)
@@ -117,4 +120,5 @@ def test_binary_search_tree():
     bst[2] = 'Smith'
     bst[10] = 'Karl'
 
-    assert bst.get(2) == 'Smith'
+    assert bst[2] == 'Smith'
+    assert 10 in bst
