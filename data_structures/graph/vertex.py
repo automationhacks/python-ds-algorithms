@@ -8,7 +8,10 @@ class Vertex:
         self.color = 'white'
         self.distance = sys.maxsize
         self.predecessor = None
+        # Below tracks the no of steps in the algorithm before a vertex is
+        # first encountered
         self.discovery = 0
+        # Below tracks the no of steps before a vertex is colored black
         self.finish_time = 0
 
     def add_neighbor(self, nbr, weight=0):
