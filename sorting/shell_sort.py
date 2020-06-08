@@ -1,36 +1,37 @@
 def shell_sort(items):
-    sub_list_count = len(items) // 2
+    # Choosing mid point as the gap
+    gap = len(items) // 2
 
-    while sub_list_count > 0:
-        for start_position in range(sub_list_count):
-            insertion_sort_with_gap(items, start_position, sub_list_count)
+    while gap > 0:
+        for start_pos in range(gap):
+            insertion_sort_with_gap(items, start_pos, gap)
 
-        print(
-            f'After increment of size: {sub_list_count} the list is {items}')
+        print(f'After increment of size: {gap} the list is {items}')
 
         # Reducing the gap by a factor of 2
-        sub_list_count = sub_list_count // 2
+        gap = gap // 2
 
     return items
 
 
-def insertion_sort_with_gap(items, start, gap):
+def insertion_sort_with_gap(sublist, start, gap):
     # Init loop from start position + gap until total items and step using gap
-    for i in range(start + gap, len(items), gap):
+    for i in range(start + gap, len(sublist), gap):
+        # Below is insertion sort logic
         position = i
         # Store the current value
-        current_value = items[i]
+        current_value = sublist[i]
 
         # Gr than eq is important here.
         # If item on pos - gap is greater than current value, then continue
-        while position >= gap and items[position - gap] > current_value:
+        while position >= gap and sublist[position - gap] > current_value:
             # Shift items by gap
-            items[position] = items[position - gap]
+            sublist[position] = sublist[position - gap]
             # Reduce the position with gap
             position -= gap
 
         # Finally, insert the current item at the last position
-        items[position] = current_value
+        sublist[position] = current_value
 
 
 def test_shell_sort():
