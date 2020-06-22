@@ -29,7 +29,7 @@ def partition(alist, first, last):
             left_mark += 1
 
         # Decrement right mark till we find a value < pivot value
-        while alist[right_mark] >= pivot_value and right_mark >= left_mark:
+        while right_mark >= left_mark and alist[right_mark] >= pivot_value:
             right_mark -= 1
 
         # If we have crossed over
